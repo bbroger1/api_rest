@@ -1,0 +1,28 @@
+{
+  "name": "api_rest",
+  "version": "1.0.0",
+  "description": "API Rest para estudos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbroger1/api_rest.git"
+  },
+  "keywords": [
+    "API",
+    "Estudo",
+    "Rest",
+    "Node"
+  ],
+  "author": "bbroger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbroger1/api_rest/issues"
+  },
+  "homepage": "https://github.com/bbroger1/api_rest#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
