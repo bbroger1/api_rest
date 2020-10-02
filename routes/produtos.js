@@ -4,14 +4,14 @@ const router = express.Router();
 // retorna todos os produtos
 router.get('/', (req, res, next) => {
     res.status(200).send({
-        mensagem: 'Get na rota de produtos'
+        mensagem: 'Recuperar todos os produtos'
     })
 });
 
 // insere um produto
 router.post('/', (req, res, next) => {
     res.status(201).send({
-        mensagem: 'Post na rota de produtos'
+        mensagem: 'Inserir um produto'
     })
 });
 
@@ -21,21 +21,21 @@ router.get('/:id_produto', (req, res, next) => {
 
     res.status(200).send({
         id: idProduto,
-        mensagem: 'Get com parâmetro "' + idProduto + '" na rota de produtos'
+        mensagem: 'Buscar um produto pelo seu id'
     })
 });
 
 // atualiza um produto
 router.patch('/:id_produto', (req, res, next) => {
     res.status(201).send({
-        mensagem: 'Patch na rota de produtos'
+        mensagem: 'Editar um produto'
     })
 });
 
 // deleta um produto
 router.delete('/:id_produto', (req, res, next) => {
     res.status(201).send({
-        mensagem: 'Delete na rota de produtos'
+        mensagem: 'Deletar um produto'
     })
 });
 
