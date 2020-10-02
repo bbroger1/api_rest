@@ -1,23 +1,63 @@
 const express = require('express');
 const router = express.Router();
+const mysql = require('../mysql').pool;
 
 // retorna todos os produtos
 router.get('/', (req, res, next) => {
-    res.status(200).send({
-        mensagem: 'Recuperar todos os produtos'
-    })
+    mysql.getConnection((error, conn) => {
+        if (error) {
+            return res.status(500).send({ error: error })
+        }
+
+        conn.query(
+            'SELECT * FROM produtos',
+            (error, resultado, field) => {
+                conn.release();
+
+                if (error) {
+                    return res.status(500).send({
+                        error: error,
+                        response: "Aconteceu algo inesperado e não foi possível apresentar os produtos"
+                    })
+                }
+
+                return res.status(200).send({
+                    response: resultado
+                })
+            }
+        )
+
+    });
 });
 
 // insere um produto
 router.post('/', (req, res, next) => {
-    const produto = {
-        nome: req.body.nome,
-        preco: req.body.preco,
-    };
-    res.status(201).send({
-        mensagem: 'Inserir um produto',
-        produtoCriado: produto
-    })
+    mysql.getConnection((error, conn) => {
+        if (error) {
+            return res.status(500).send({ error: error })
+        }
+
+        conn.query(
+            'INSERT INTO produtos (nome, preco) VALUES (?,?)',
+            [req.body.nome, req.body.preco],
+            (error, resultado, field) => {
+                conn.release();
+
+                if (error) {
+                    return res.status(500).send({
+                        error: error,
+                        response: "Aconteceu algo inesperado e não foi possível cadastrar o produto"
+                    })
+                }
+
+                res.status(201).send({
+                    mensagem: 'Produto inserido com sucesso.',
+                    id_produto: resultado.insertId
+                })
+            }
+        )
+
+    });
 });
 
 // retorna um produtos
